@@ -56,3 +56,46 @@ def data_events(req):
     eventsData = serializers.serialize('json', events)
     return JsonResponse(eventsData, safe=False)
 
+def data_dashboard(req):
+    events = Event.objects.all().order_by("-date_created")[:7]
+    eventsData = serializers.serialize('json', events)
+    return JsonResponse(eventsData, safe=False)
+
+
+
+def data_dashboardA01(req):
+    events = Event.objects.filter(node_id='A01').order_by("-date_created")[:7]
+    eventsData = serializers.serialize('json', events)
+    return JsonResponse(eventsData, safe=False)
+
+def data_dashboardA02(req):
+    events = Event.objects.filter(node_id='A02').order_by("-date_created")[:7]
+    eventsData = serializers.serialize('json', events)
+    return JsonResponse(eventsData, safe=False)
+
+def data_dashboardA03(req):
+    events = Event.objects.filter(node_id='A03').order_by("-date_created")[:7]
+    eventsData = serializers.serialize('json', events)
+    return JsonResponse(eventsData, safe=False)
+
+def data_dashboardA04(req):
+    events = Event.objects.filter(node_id='A04').order_by("-date_created")[:7]
+    eventsData = serializers.serialize('json', events)
+    return JsonResponse(eventsData, safe=False)
+
+def data_dashboardA05(req):
+    events = Event.objects.filter(node_id='A05').order_by("-date_created")[:7]
+    eventsData = serializers.serialize('json', events)
+    return JsonResponse(eventsData, safe=False)
+
+
+def data_dashboardA06(req):
+    events = Event.objects.filter(node_id='A06').order_by("-date_created")[:7]
+    eventsData = serializers.serialize('json', events)
+    return JsonResponse(eventsData, safe=False)
+
+
+def data_dashboardA07(req):
+    events = Event.objects.filter(node_id='A07').order_by("-date_created")[:7]
+    eventsData = serializers.serialize('json', events)
+    return JsonResponse(eventsData, safe=False)

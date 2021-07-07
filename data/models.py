@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Event(models.Model): #Fields
-    node_id = models.CharField(max_length=2)
+    node_id = models.CharField(max_length=5)
     node_loc = models.CharField(max_length=10)
     temp = models.IntegerField()
     hum = models.IntegerField()
