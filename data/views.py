@@ -8,10 +8,12 @@ from django.core import serializers
 
 
 
+from django.views.decorators.csrf import csrf_exempt
 
 
-
-
+import datetime
+import json
+from django.db.models import Avg
 
 # Create your views here.
 def index(req):
@@ -35,7 +37,7 @@ def test(req):
 #     return render(req, 'data/testdata.html', ctx)
 
 def log(req):
-    events = Event.objects.all().order_by("-date_created")
+    events = Event.objects.all().order_by("-date_created")[:100]
     listLocation = Event.objects.values("node_loc").distinct()
     ctx = {'events': events}
     ctx['listLocation'] = listLocation
@@ -62,40 +64,46 @@ def data_dashboard(req):
     return JsonResponse(eventsData, safe=False)
 
 
+def data_test2(req):
+    d = datetime.datetime.now().replace(second=0, microsecond=0) -  datetime.timedelta(minutes = 2)
+ 
+    events = Event.objects.filter(date_created__gte = d, date_created__lt = d +  datetime.timedelta(minutes = 1))
+    print(events.aggregate(Avg('temp'))["temp__avg"])
+    print(events.aggregate(Avg('hum'))["hum__avg"])
+    print(events.aggregate(Avg('light'))["light__avg"])
+    print(events.aggregate(Avg('snd'))["snd__avg"])
+    eventsData = serializers.serialize('json', events)
+    return JsonResponse(eventsData, safe=False)
+
+
+@csrf_exempt
+def data_test(req):
+    ctx = {}
+    if req.method == 'POST':
+    
+        postData = json.dumps(req.POST)
+        try:
+            events = Event.objects.filter(node_loc=req.POST["node_loc"]).order_by("-date_created")[:10]
+    
+            eventsData = serializers.serialize('json', events)
+            return JsonResponse(eventsData, safe=False)
+
+        except:
+            return JsonResponse(postData, safe=False)
+      
+        postData = json.dumps(req.POST)
+      
+        return JsonResponse(postData, safe=False)
+        # return redirect('/blog/')
+
+
+    else:
+    
+        return render(req, 'data/datatest.html', ctx)
 
 def data_dashboardA01(req):
     events = Event.objects.filter(node_id='A01').order_by("-date_created")[:7]
+    
     eventsData = serializers.serialize('json', events)
     return JsonResponse(eventsData, safe=False)
 
-def data_dashboardA02(req):
-    events = Event.objects.filter(node_id='A02').order_by("-date_created")[:7]
-    eventsData = serializers.serialize('json', events)
-    return JsonResponse(eventsData, safe=False)
-
-def data_dashboardA03(req):
-    events = Event.objects.filter(node_id='A03').order_by("-date_created")[:7]
-    eventsData = serializers.serialize('json', events)
-    return JsonResponse(eventsData, safe=False)
-
-def data_dashboardA04(req):
-    events = Event.objects.filter(node_id='A04').order_by("-date_created")[:7]
-    eventsData = serializers.serialize('json', events)
-    return JsonResponse(eventsData, safe=False)
-
-def data_dashboardA05(req):
-    events = Event.objects.filter(node_id='A05').order_by("-date_created")[:7]
-    eventsData = serializers.serialize('json', events)
-    return JsonResponse(eventsData, safe=False)
-
-
-def data_dashboardA06(req):
-    events = Event.objects.filter(node_id='A06').order_by("-date_created")[:7]
-    eventsData = serializers.serialize('json', events)
-    return JsonResponse(eventsData, safe=False)
-
-
-def data_dashboardA07(req):
-    events = Event.objects.filter(node_id='A07').order_by("-date_created")[:7]
-    eventsData = serializers.serialize('json', events)
-    return JsonResponse(eventsData, safe=False)

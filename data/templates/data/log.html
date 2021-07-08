@@ -53,12 +53,13 @@
     <div class="container">
       <!-- Content here -->
    <h1>Data Log</h1>
+     {% comment %}
    <div class="btn-group">
   <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     Filter
   </button>
  
-  <ul class="dropdown-menu">
+ <ul class="dropdown-menu">
        {% for item in listLocation %}
         <li><a class="dropdown-item" href="#">{{item.node_loc}}</a></li>
       
@@ -68,6 +69,7 @@
     <li><a class="dropdown-item" href="#">Show All</a></li>
   </ul>
 </div>
+ {% endcomment %}
     <table class="table table-striped table-hover">
       <thead class="table-dark">
         <tr>
