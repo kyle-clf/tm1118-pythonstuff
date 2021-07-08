@@ -1,151 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
 
-    <title>IC2140 TM1118</title>
-  </head>
-  <!-- Javascript: chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style-dark.css' %}">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">Smart Campus in W311</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/"
-              >Dashboard</a
-            >
-          </li>
+  <title>IC2140 TM1118</title>
+</head>
+<!-- Javascript: chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-          <li class="nav-item">
-            <a class="nav-link" href="data_event">DataJSON</a>
-          </li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Smart Campus in W311</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./dashboard">Dashboard</a>
+        </li>
 
 
-          <li class="nav-item">
-            <a class="nav-link" href="log" >Log</a>
-          </li>
-          {% comment %}
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          {% endcomment %}
-        </ul>
-        {% comment %}
-        <form class="d-flex">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        {% endcomment %}
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="log">Log</a>
+        </li>
+
+
+
+      </ul>
+
+      <div class="d-flex">
+        <button class="btn btn-outline-dark" type="submit">
+          <i class="bi bi-mask"></i>
+          Dark Mode
+
+          <div class="form-check form-switch" style=" display: inline-flex; ">
+            <input class="form-check-input" type="checkbox" id="darkMode">
+
+          </div>
+        </button>
       </div>
+
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <body>
-    <div class="container">
-      <!-- Content here -->
-      <h5><span class="badge bg-secondary">#1</span></h5>
+<body>
+  <div class="container">
+    <!-- Content here -->
+    <h5><span class="badge bg-secondary">#1</span></h5>
 
-      <h1>IoT sensor nodes</h1>
+    <h1>IoT sensor nodes</h1>
 
-      <p>MQTT data</p>
+    <p>MQTT data</p>
 
-      <canvas id="chart" width="400" height="200"></canvas>
-      <script>
-        var ctx = document.getElementById("chart");
-        var chart = new Chart(ctx, {
-          type: "line",
-          
-          data: {
-            labels: [],
-            datasets: [
-              {
-                label: 'Temperatures Through Time',
-                data: [],
-              },
-            ],
-          },
-        });
-      </script>
-    </div>
-
-    <!-- Javascript: Bootstrap Bundle with Popper -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <canvas id="chart" width="400" height="200"></canvas>
     <script>
-      function getFeed() {
-        $.ajax({
-          url: "/data_event",
-          dataType: "json",
-          success: function (data) {
-            var dataTemp = [];
-            dataset = JSON.parse(data)
-            dataset.reverse()
-            dataset.forEach((item) => dataTemp.push(item.fields.temp));
-            var dataTimestamp = [];
-            dataset.forEach((item) =>
-              dataTimestamp.push(item.fields.date_created)
-            );
-            chart.data.labels = dataTimestamp;
-            chart.data.datasets[0].data = dataTemp;
-            chart.update();
+      Chart.defaults.color = "#999999";
+      var ctx = document.getElementById("chart");
+      var chart = new Chart(ctx, {
+        type: "line",
 
-          },
-          complete: function (data) {
-            setTimeout(getFeed, 1000);
-          },
-        });
-      }
-      $(document).ready(function () {
-        setTimeout(getFeed, 1000); 
+        data: {
+          labels: [],
+
+          datasets: [
+            {
+
+              borderColor: 'rgb(155, 155, 155)',
+              label: 'Temperatures Through Time',
+              data: [],
+            },
+          ],
+        },
       });
-    
+
     </script>
-  </body>
+  </div>
+
+  <!-- Javascript: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    function getFeed() {
+      $.ajax({
+        url: "/data_event",
+        dataType: "json",
+        success: function (data) {
+          var dataTemp = [];
+          dataset = JSON.parse(data)
+          dataset.reverse()
+          dataset.forEach((item) => dataTemp.push(item.fields.temp));
+          var dataTimestamp = [];
+          dataset.forEach((item) =>
+            dataTimestamp.push(item.fields.date_created)
+          );
+          chart.data.labels = dataTimestamp;
+          chart.data.datasets[0].data = dataTemp;
+          chart.update();
+
+        },
+        complete: function (data) {
+          setTimeout(getFeed, 1000);
+        },
+      });
+    }
+    $(document).ready(function () {
+      setTimeout(getFeed, 1000);
+    });
+
+  </script>
+</body>
+
+<script>
+  var darkMode = document.getElementById('darkMode');
+
+  var darkLabel = "darkModeLabel";
+  var darkLang = "Dark";
+  var lightLang = "Light";
+
+  var imgID = "logo";
+  var darkImg = "./dark.png";
+  var lightImg = "./light.png";
+
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      if (darkMode) {
+        initTheme();
+
+      }
+
+    } catch (error) {
+
+    }
+    darkMode.addEventListener('change', function () {
+
+      resetTheme();
+    });
+  });
+
+  function initTheme() {
+    var darkThemeSelected = localStorage.getItem('darkMode') !== null && localStorage.getItem('darkMode') === 'dark';
+    darkMode.checked = darkThemeSelected;
+    try {
+      darkThemeSelected ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
+    } finally {
+
+    }
+    try {
+      darkThemeSelected ? document.getElementById(imgID).src = darkImg : document.getElementById(imgID).src = lightImg;
+    } finally {
+
+    }
+    try {
+
+    } finally {
+      darkThemeSelected ? document.getElementById(darkLabel).innerHTML = darkLang : document.getElementById(darkLabel).innerHTML = lightLang;
+    }
+
+
+  }
+
+  function resetTheme() {
+    if (darkMode.checked) {
+      document.body.setAttribute('data-theme', 'dark');
+      localStorage.setItem('darkMode', 'dark');
+      try { document.getElementById(imgID).src = darkImg; } finally { }
+      try { document.getElementById(darkLabel).innerHTML = darkLang; } finally { }
+    } else {
+
+
+      document.body.removeAttribute('data-theme');
+      localStorage.removeItem('darkMode');
+      try { document.getElementById(imgID).src = lightImg; } finally { }
+      try { document.getElementById(darkLabel).innerHTML = lightLang; } finally { }
+    }
+  }
+
+</script>
+
 </html>
