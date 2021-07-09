@@ -1,84 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style-dark.css' %}">
-  
-    <title>IC2140 TM1118</title>
-  </head>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">Smart Campus in W311</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./dashboard">Dashboard</a>
-          </li>
-  
-  
-  
-  
-          <li class="nav-item">
-            <a class="nav-link" href="log">Log</a>
-          </li>
-  
-  
-  
-        </ul>
-  
-        <div class="d-flex">
-          <button class="btn btn-outline-dark" type="submit">
-            <i class="bi bi-mask"></i>
-            Dark Mode
-  
-            <div class="form-check form-switch" style=" display: inline-flex; ">
-              <input class="form-check-input" type="checkbox" id="darkMode">
-  
-            </div>
-          </button>
-        </div>
-  
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style-dark.css' %}">
+
+  <title>IC2140 TM1118</title>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Smart Campus in W311</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./dashboard">Dashboard</a>
+        </li>
+
+
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="log">Log</a>
+        </li>
+
+
+
+      </ul>
+
+      <div class="d-flex">
+        <button class="btn btn-outline-dark" type="submit">
+          <i class="bi bi-mask"></i>
+          Dark Mode
+
+          <div class="form-check form-switch" style=" display: inline-flex; ">
+            <input class="form-check-input" type="checkbox" id="darkMode">
+
+          </div>
+        </button>
       </div>
-    </div>
-  </nav>
 
-  <body>
-    <div class="container">
-      <!-- Content here -->
-   <h1>Data Log</h1>
-     {% comment %}
-   <div class="btn-group">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Filter
-  </button>
- 
- <ul class="dropdown-menu">
-       {% for item in listLocation %}
+    </div>
+  </div>
+</nav>
+
+<body>
+  <div class="container">
+    <!-- Content here -->
+    <div class="row">
+      <div class="col">
+        <h1>Data Log</h1>
+      </div>
+      <div class="col">
+        <div class="float-end">
+
+          <a href="./logd" class="btn btn-secondary" >More</a>
+        </div>
+       </div>
+
+    </div>
+
+<div class="row">
+
+    {% comment %}
+    <div class="btn-group">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Filter
+      </button>
+
+      <ul class="dropdown-menu">
+        {% for item in listLocation %}
         <li><a class="dropdown-item" href="#">{{item.node_loc}}</a></li>
-      
+
         {% endfor %}
 
-    <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="#">Show All</a></li>
-  </ul>
-</div>
- {% endcomment %}
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="#">Show All</a></li>
+      </ul>
+    </div>
+    {% endcomment %}
     <table class="table table-striped table-hover">
       <thead class="table-dark">
         <tr>
@@ -88,7 +101,7 @@
           <th>Temperature</th>
           <th>Humidity</th>
           <th>Light</th>
-          <th>snd</th>
+          <th>Sound</th>
           <th>Created Date</th>
         </tr>
       </thead>
@@ -112,16 +125,15 @@
       </tbody>
     </table>
 
-    </div>
+  </div>
+</div>
+  <!-- Javascript: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
-    <!-- Javascript: Bootstrap Bundle with Popper -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-  
-  </body>
-  {% load static %}
+</body>
+{% load static %}
 <script src="{% static 'darkmode.js' %}"></script>
+
 </html>

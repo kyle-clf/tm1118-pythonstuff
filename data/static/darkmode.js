@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+
+
+
 function initTheme() {
   var darkThemeSelected = localStorage.getItem('darkMode') !== null && localStorage.getItem('darkMode') === 'dark';
   darkMode.checked = darkThemeSelected;
@@ -60,4 +63,14 @@ function resetTheme() {
     try { document.getElementById(imgID).src = lightImg; } finally { }
     try { document.getElementById(darkLabel).innerHTML = lightLang; } finally { }
   }
+}
+
+
+
+function setDarkMode() {
+  try {
+    document.getElementById('darkMode').checked = !document.getElementById('darkMode').checked
+    resetTheme();
+  } finally { }
+
 }

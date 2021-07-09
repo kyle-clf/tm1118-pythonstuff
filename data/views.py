@@ -77,7 +77,7 @@ def data_dashboard(req):
     return JsonResponse(eventsData, safe=False)
 
 
-def data_test3(req):
+def graph_overview(req):
     ctx = {}
     return render(req, 'data/showGraph.html', ctx)
 

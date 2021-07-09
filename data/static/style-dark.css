@@ -4,6 +4,10 @@ html {
   overflow-y: scroll; 
 }
 
+.row {
+  padding-top: 1.5em;
+}
+
 ::-webkit-scrollbar {
   width: 0 !important ;
   background: transparent !important; 
