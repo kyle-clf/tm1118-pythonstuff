@@ -1,50 +1,125 @@
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <!-- Bootstrap CSS -->
-  <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-  crossorigin="anonymous"
-/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style-custom.css' %}">
 
-<table id="dataTable" class="table table-striped table-hover"  data-page-length="25">
+  <title>IC2140 TM1118</title>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Smart Campus in W311</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./graph/overview">Graphs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./log">Query</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./log">Log</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <button class="btn btn-outline-dark" type="submit">
+          <i class="bi bi-mask"></i>
+          Dark Mode
+          <div class="form-check form-switch" style=" display: inline-flex; ">
+            <input class="form-check-input" type="checkbox" id="darkMode">
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<body>
+  <div class="container">
+    <!-- Content here -->
+    <div class="row">
+      <div class="col">
+        <h1>Data Log</h1>
+      </div>
+      <div class="col">
+        <div class="float-end">
+
+          
+        </div>
+       </div>
+
+    </div>
+
+<div class="row">
+
+
+  <table class="table table-striped table-hover" id="dataTable" data-page-length="15">
     <thead class="table-dark">
-        <tr class="text-center">
-          <th>ID</th>
-          <th>Sensor ID</th>
-          <th>Location</th>
-          <th>Temperature</th>
-          <th>Humidity</th>
-          <th>Light</th>
-          <th>Sound</th>
-          <th>Created Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for event in events %}
-        <tr>
-          <td class="text-end">{{ event.id }}</td>
-          <td>{{ event.node_id }}</td>
-          <td >{{ event.node_loc }}</td>
+      <tr>
+        <th>ID</th>
+        <th>Sensor ID</th>
+        <th>Location</th>
+        <th>Temperature</th>
+        <th>Humidity</th>
+        <th>Light</th>
+        <th>Sound</th>
+        <th>Created Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in events %}
+      <tr>
+        <td>{{ event.id }}</td>
+        <td>{{ event.node_id }}</td>
+        <td>{{ event.node_loc }}</td>
 
-          <td class="text-center">{{event.temp}}</td>
+        <td>{{event.temp}}</td>
 
-          <td class="text-center">{{event.hum}}</td>
+        <td>{{event.hum}}</td>
 
-          <td class="text-center">{{event.light}}</td>
-          <td class="text-center">{{event.snd}}</td>
+        <td>{{event.light}}</td>
+        <td>{{event.snd}}</td>
 
-          <td class="text-end">{{ event.date_created }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
+        <td>{{ event.date_created }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-</table>
 
+    
+
+  </div>
+</div>
+  <!-- Javascript: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+</body>
+{% load static %}
+<script src="{% static 'darkmode.js' %}"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 <script>
 
-            $('#dataTable').DataTable({"lengthMenu": [[25, 50,100, -1], [ 25, 50,100, "All"]]});
+    $('#dataTable').DataTable({"lengthMenu": [[15,25, 50,100, -1], [15, 25, 50,100, "All"]]});
 
 </script>
+</html>

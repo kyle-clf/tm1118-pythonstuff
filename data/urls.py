@@ -10,6 +10,7 @@ urlpatterns = [
     path('graph/overview', views.graph_overview),
     path('log', views.log),
     path('logd', views.logd),
+  
     # data
     path('data_event', views.data_events),
     path('dashboard-data', views.data_dashboard),
