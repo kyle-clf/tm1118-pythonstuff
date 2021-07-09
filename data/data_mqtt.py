@@ -42,12 +42,12 @@ def on_message(client, userdata, msg):
         pass
 
 
-client = mqtt.Client()
+# client = mqtt.Client()
 
 
 
-client.on_connect = on_connect
-client.on_message = on_message
+# client.on_connect = on_connect
+# client.on_message = on_message
 
-client.connect("ia.ic.polyu.edu.hk", 1883)
-client.loop_start()
+# client.connect("ia.ic.polyu.edu.hk", 1883)
+# client.loop_start()

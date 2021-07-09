@@ -79,7 +79,7 @@ def data_dashboard(req):
 
 def graph_overview(req):
     ctx = {}
-    return render(req, 'data/showGraph.html', ctx)
+    return render(req, 'data/showGraphByCat.html', ctx)
 
 
 def data_test2(req):
