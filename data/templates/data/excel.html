@@ -57,7 +57,7 @@
     <!-- Content here -->
     <div class="row">
       <div class="col">
-        <h1>Data Log</h1>
+        <h1>Venue Events</h1>
       </div>
       <div class="col">
         <div class="float-end">
@@ -70,35 +70,39 @@
 
 <div class="row">
 
+  <form action="/excel" method="POST" id="post-form">
+    <input type="date" id="startdate" name="startdate" reqired>
+    <input type="time" id="starttime" name="starttime" required>
+    <input type="date" id="enddate" name="enddate" reqired>
+    <input type="time" id="endtime" name="endtime" required>
+    <input type="submit" value="Send Request">
+  </form>
+  <tbody>
 
   <table class="table table-striped table-hover" id="dataTable" data-page-length="15">
     <thead class="table-dark">
       <tr>
-        <th>ID</th>
-        <th>Sensor ID</th>
-        <th>Location</th>
-        <th>Temperature</th>
-        <th>Humidity</th>
-        <th>Light</th>
-        <th>Sound</th>
-        <th>Created Date</th>
+        <th>Venue</th>
+        <th>Date</th>
+        <th>Time Start</th>
+        <th>Time End</th>
+        <th>Event</th>
+        <th>Instructor</th>
       </tr>
     </thead>
-    <tbody>
-      {% for event in events %}
+
+    
+      {% for VenueEvent in VenueEvents %}
       <tr>
-        <td>{{ event.id }}</td>
-        <td>{{ event.node_id }}</td>
-        <td>{{ event.node_loc }}</td>
+        <td>{{ VenueEvent.venue }}</td>
+        <td>{{ VenueEvent.date }}</td>
+        <td>{{ VenueEvent.timeStart }}</td>
 
-        <td>{{event.temp}}</td>
+        <td>{{VenueEvent.timeEnd}}</td>
 
-        <td>{{event.hum}}</td>
+        <td>{{VenueEvent.event}}</td>
 
-        <td>{{event.light}}</td>
-        <td>{{event.snd}}</td>
-
-        <td>{{ event.date_created }}</td>
+        <td>{{VenueEvent.instructor}}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -125,3 +129,4 @@
 
 </script>
 </html>
+

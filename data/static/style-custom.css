@@ -14,6 +14,7 @@ html {
   display: none !important; /* for Chrome, Safari, and Opera */
 }
 
+
 [data-theme="dark"] .navbar-light .navbar-brand {
   color: rgba(255,255,255,.9);
 }
@@ -25,11 +26,21 @@ html {
 [data-theme="dark"] .navbar-light .navbar-nav .nav-link {
   color: rgba(255,255,255,.9);
 }
+[data-theme="dark"] option {
+  color: rgb(255,255,255) !important;
+}
 
 [data-theme="dark"] td {
   color: rgb(255,255,255) !important;
 }
+[data-theme="dark"] .odd {
 
+  background-color: rgba(0,0,0,0) !important;
+}
+[data-theme="dark"] .even {
+
+  background-color: rgba(0,0,0,0) !important;
+}
 /*  */
 [data-theme="dark"] {
   background-color: #111 !important;
